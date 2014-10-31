@@ -1,0 +1,18 @@
+//判断一棵树是否为BST(二叉排序树/二叉搜索树/二叉查找树)
+//#include命令包含limits.h这个头文件，里面定义了各种数据类型的最大值和最小值。其中有一个定义就是INT_MAX
+struct TreeNode{
+  int val;
+  TreeNode *left;
+  TreeNode *right;
+};
+bool isHelper(TreeNode *root, int low, int high){
+  if(root == NULL)
+    return true;
+  if(root->val > low && root < high)
+    return isHelper(root->left, low, root->val) && isHelper(root->right, root->val, high);
+  else
+    return false;
+}
+bool isValidBST(TreeNode *root){
+  return isHelper(root, INT_MIN, INT_MAX);
+}
